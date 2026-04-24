@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "520849358558",
+    "firebase_url": "https://foodcourtgo-default-rtdb.firebaseio.com",
+    "project_id": "foodcourtgo",
+    "storage_bucket": "foodcourtgo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520849358558:android:28f5b770f3982db8498c4f",
+        "android_client_info": {
+          "package_name": "com.example.foodcourtgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4_rcQPn1l78X-WwFZEmhKUpC18CAHymg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

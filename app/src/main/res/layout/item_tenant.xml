@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Thumbnail tenant -->
+        <ImageView
+            android:id="@+id/ivTenantImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:scaleType="centerCrop"
+            android:background="@color/biru_tua"
+            android:src="@drawable/ic_menu"
+            android:contentDescription="Gambar Tenant" />
+
+        <!-- Info tenant (nama, kategori, deskripsi) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvTenantNama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Tenant"
+                android:textColor="@color/biru_tua"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTenantKategori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kategori"
+                android:textColor="@color/biru"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tvTenantDeskripsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi singkat tenant"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

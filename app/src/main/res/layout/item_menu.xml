@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Gambar makanan di kanan -->
+        <ImageView
+            android:id="@+id/ivMenuImage"
+            android:layout_width="86dp"
+            android:layout_height="65dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:contentDescription="Gambar Menu"
+            android:background="@drawable/shape_menu_image" />
+
+        <!-- Nama makanan -->
+        <TextView
+            android:id="@+id/tvMenuNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/ivMenuImage"
+            android:layout_alignParentTop="true"
+            android:text="Nama Menu"
+            android:textColor="#111111"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Deskripsi -->
+        <TextView
+            android:id="@+id/tvMenuDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMenuNama"
+            android:layout_toStartOf="@id/ivMenuImage"
+            android:layout_marginTop="4dp"
+            android:text="Deskripsi singkat menu"
+            android:textColor="#444444"
+            android:textSize="12sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Harga -->
+        <TextView
+            android:id="@+id/tvMenuHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMenuDeskripsi"
+            android:layout_toStartOf="@+id/btnTambah"
+            android:layout_marginTop="8dp"
+            android:text="Rp0"
+            android:textColor="#111111"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Tombol Tambah -->
+        <TextView
+            android:id="@+id/btnTambah"
+            android:layout_width="84dp"
+            android:layout_height="28dp"
+            android:layout_below="@id/ivMenuImage"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp"
+            android:text="Tambah"
+            android:textColor="#2f5c85"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/btn_tambah_background"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
