@@ -43,7 +43,13 @@ public class TakeAwayDineInActivity extends AppCompatActivity {
         });
 
         btnDineIn.setOnClickListener(v -> {
-            startActivity(new Intent(this, QrScannerActivity.class));
+            Intent qrIntent = new Intent(TakeAwayDineInActivity.this, QrScannerActivity.class);
+            qrIntent.putExtra("tenantId", tenantId);
+            qrIntent.putExtra("tenantNama", tenantNama);
+            qrIntent.putExtra("tenantGambar", tenantGambar);
+            qrIntent.putExtra("tenantKategori", tenantKategori);
+            qrIntent.putExtra("tenantDeskripsi", tenantDeskripsi);
+            startActivity(qrIntent);
         });
     }
 }

@@ -94,19 +94,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
-            <CheckBox
-                android:id="@+id/cbPedas"
-                android:layout_width="wrap_content"
+            <!-- Tempat untuk checkbox dinamis -->
+            <LinearLayout
+                android:id="@+id/llOpsiContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pedas?"
-                android:textSize="16sp" />
-
-            <CheckBox
-                android:id="@+id/cbPorsiBesar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Porsi besar? (+Rp5.000)"
-                android:textSize="16sp" />
+                android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 

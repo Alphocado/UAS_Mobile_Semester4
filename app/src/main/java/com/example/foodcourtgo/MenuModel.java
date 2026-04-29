@@ -1,5 +1,7 @@
 package com.example.foodcourtgo;
 
+import java.util.List;
+
 public class MenuModel {
     private String menuId;     // ID dari node (misal T0001_M01)
     private String nama;
@@ -7,6 +9,8 @@ public class MenuModel {
     private long harga;        // Firebase simpan angka → long
     private String gambar;
     private String tenantId;
+    private List<TambahanModel> tambahan;
+
 
     // Constructor kosong wajib
     public MenuModel() {}
@@ -18,8 +22,12 @@ public class MenuModel {
     public long getHarga() { return harga; }
     public String getGambar() { return gambar; }
     public String getTenantId() { return tenantId; }
+    public List<TambahanModel> getTambahan() { return tambahan; }
+
 
     // Setters
+    public void setTambahan(List<TambahanModel> tambahan) { this.tambahan = tambahan; }
+
     public void setMenuId(String menuId) { this.menuId = menuId; }
     public void setNama(String nama) { this.nama = nama; }
     public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }

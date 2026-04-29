@@ -1,12 +1,12 @@
 package com.example.foodcourtgo;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,14 +22,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DetailTenantActivity extends AppCompatActivity {
 
@@ -44,29 +41,25 @@ public class DetailTenantActivity extends AppCompatActivity {
     private MenuAdapter menuAdapter;
     private List<MenuModel> menuList = new ArrayList<>();
     private List<MenuModel> menuListFiltered = new ArrayList<>();
-    private Map<String, Integer> pesananMap = new HashMap<>();
+    private List<PesananItem> pesananList = new ArrayList<>();   // ganti Map
 
     private String tenantId, tenantNama, tenantGambar, tenantKategori, tenantDeskripsi;
 
-    // ActivityResultLauncher untuk menerima hasil dari MenuOptionActivity
-    private final ActivityResultLauncher<Intent> menuOptionLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-                        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                            Intent data = result.getData();
-                            String menuId = data.getStringExtra("menuId");
-                            // hargaTambahan bisa digunakan nanti
-                            // long hargaTambahan = data.getLongExtra("hargaTambahan", 0);
+    private ActivityResultLauncher<Intent> menuOptionLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    String id = data.getStringExtra("menuId");
+                    String nama = data.getStringExtra("menuNama");
+                    long harga = data.getLongExtra("menuHarga", 0);
+                    String opsi = data.getStringExtra("opsi");
+                    long tambahan = data.getLongExtra("hargaTambahan", 0);
 
-                            int currentQty = pesananMap.containsKey(menuId) ? pesananMap.get(menuId) : 0;
-                            pesananMap.put(menuId, currentQty + 1);
-
-                            int totalItems = 0;
-                            for (int q : pesananMap.values()) totalItems += q;
-                            updateOrderBar(totalItems);   // <-- method ini harus ada
-                            menuAdapter.notifyDataSetChanged();
-                        }
-                    });
+                    PesananItem item = new PesananItem(id, nama, harga, opsi, tambahan);
+                    pesananList.add(item);
+                    updateOrderBar();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,17 +92,12 @@ public class DetailTenantActivity extends AppCompatActivity {
         Glide.with(this).load(tenantGambar).into(ivTenantImage);
 
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
-        menuAdapter = new MenuAdapter(this, menuListFiltered, pesananMap,
+        menuAdapter = new MenuAdapter(this, menuListFiltered,
                 (menu, position) -> {
                     Intent optIntent = new Intent(DetailTenantActivity.this, MenuOptionActivity.class);
                     optIntent.putExtra("menuId", menu.getMenuId());
-                    optIntent.putExtra("menuNama", menu.getNama());
-                    optIntent.putExtra("menuDeskripsi", menu.getDeskripsi());
-                    optIntent.putExtra("menuGambar", menu.getGambar());
-                    optIntent.putExtra("menuHarga", menu.getHarga());
                     menuOptionLauncher.launch(optIntent);
-                },
-                totalItems -> updateOrderBar(totalItems)
+                }
         );
         rvMenu.setAdapter(menuAdapter);
 
@@ -132,8 +120,6 @@ public class DetailTenantActivity extends AppCompatActivity {
 
         muatMenu();
     }
-
-    // ==================== METHOD WAJIB ====================
 
     private void muatMenu() {
         FirebaseDatabase.getInstance().getReference("menu")
@@ -177,23 +163,17 @@ public class DetailTenantActivity extends AppCompatActivity {
         menuAdapter.notifyDataSetChanged();
     }
 
-    private void updateOrderBar(int totalItems) {
-        if (totalItems == 0) {
+    private void updateOrderBar() {
+        if (pesananList.isEmpty()) {
             llOrderBar.setVisibility(View.GONE);
             return;
         }
-
         llOrderBar.setVisibility(View.VISIBLE);
 
+        int totalItems = pesananList.size();
         long totalHarga = 0;
-        for (String menuId : pesananMap.keySet()) {
-            int qty = pesananMap.get(menuId);
-            for (MenuModel menu : menuList) {
-                if (menu.getMenuId().equals(menuId)) {
-                    totalHarga += menu.getHarga() * qty;
-                    break;
-                }
-            }
+        for (PesananItem item : pesananList) {
+            totalHarga += item.getTotalHarga();
         }
 
         tvOrderItemCount.setText(totalItems + " item");
@@ -202,31 +182,31 @@ public class DetailTenantActivity extends AppCompatActivity {
     }
 
     private void tampilkanRingkasan() {
-        if (pesananMap.isEmpty()) {
+        if (pesananList.isEmpty()) {
             Toast.makeText(this, "Belum ada pesanan", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        long totalHarga = 0;
-        for (String menuId : pesananMap.keySet()) {
-            int qty = pesananMap.get(menuId);
-            for (MenuModel menu : menuList) {
-                if (menu.getMenuId().equals(menuId)) {
-                    long harga = menu.getHarga();
-                    sb.append(menu.getNama()).append("  x").append(qty)
-                            .append("  = Rp").append(String.format("%,d", harga * qty).replace(',', '.')).append("\n");
-                    totalHarga += harga * qty;
-                    break;
-                }
-            }
+        // Siapkan daftar item untuk dialog
+        String[] itemStrings = new String[pesananList.size()];
+        for (int i = 0; i < pesananList.size(); i++) {
+            PesananItem item = pesananList.get(i);
+            StringBuilder sb = new StringBuilder();
+            sb.append(item.getNama());
+            if (!item.getOpsi().isEmpty()) sb.append(" (").append(item.getOpsi()).append(")");
+            sb.append(" - Rp").append(String.format("%,d", item.getTotalHarga()).replace(',', '.'));
+            itemStrings[i] = sb.toString();
         }
-        sb.append("\nTotal: Rp").append(String.format("%,d", totalHarga).replace(',', '.'));
 
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Ringkasan Pesanan")
-                .setMessage(sb.toString())
-                .setPositiveButton("OK", null)
+        new AlertDialog.Builder(this)
+                .setTitle("Pesanan Anda")
+                .setItems(itemStrings, (dialog, which) -> {
+                    // Hapus item yang dipilih
+                    pesananList.remove(which);
+                    updateOrderBar();
+                    Toast.makeText(this, "Item dihapus", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Tutup", null)
                 .show();
     }
 }
