@@ -6,6 +6,10 @@ public class TenantModel {
     private String deskripsi;
     private String kategori;
     private String gambar;
+    private String status;   // "active" / "inactive"
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
     // Constructor kosong wajib ada untuk Firebase
     public TenantModel() {}

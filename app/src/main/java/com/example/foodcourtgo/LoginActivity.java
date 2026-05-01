@@ -59,17 +59,20 @@ public class LoginActivity extends AppCompatActivity {
                     boolean loginBerhasil = false;
                     String userId = "";
                     String namaUser = "";
+                    String roleObject = ""; // pindah ke luar
 
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         Object emailObj    = childSnapshot.child("email").getValue();
                         Object usernameObj = childSnapshot.child("username").getValue();
                         Object passObj     = childSnapshot.child("pass").getValue();
                         Object nameObj     = childSnapshot.child("name").getValue();
+                        Object roleObj     = childSnapshot.child("role").getValue();
 
-                        String email    = emailObj    == null ? "" : emailObj.toString();
-                        String username = usernameObj == null ? "" : usernameObj.toString();
-                        String pass     = passObj     == null ? "" : passObj.toString();
-                        String name     = nameObj     == null ? "" : nameObj.toString();
+                        String email      = emailObj    == null ? "" : emailObj.toString();
+                        String username   = usernameObj == null ? "" : usernameObj.toString();
+                        String pass       = passObj     == null ? "" : passObj.toString();
+                        String name       = nameObj     == null ? "" : nameObj.toString();
+                        String role       = String.valueOf(childSnapshot.child("role").getValue());
 
                         if ((usernameOrEmail.equalsIgnoreCase(email) ||
                                 usernameOrEmail.equalsIgnoreCase(username))
@@ -78,21 +81,24 @@ public class LoginActivity extends AppCompatActivity {
                             loginBerhasil = true;
                             userId = childSnapshot.getKey();  // Contoh: "A0001"
                             namaUser = name;
+                            roleObject = role; // ambil role yang benar
                             break;
                         }
                     }
 
                     if (loginBerhasil) {
-                        // ✅ Simpan userId & nama ke SharedPreferences
-                        // SharedPreferences ibarat "catatan HP" yang tetap ada
-                        // walaupun aplikasi ditutup
                         SharedPreferences pref = getSharedPreferences("FoodCourtGoPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("userId", userId);     // "A0001"
-                        editor.putString("namaUser", namaUser); // "Budi"
+                        editor.putString("userId", userId);
+                        editor.putString("namaUser", namaUser);
+                        editor.putString("role", roleObject != null ? roleObject.toString() : "customer");
                         editor.apply();
 
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        if ("super_admin".equals(roleObject != null ? roleObject.toString() : "")) {
+                            startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        }
                         finish();
                     } else {
                         btnLogin.setEnabled(true);

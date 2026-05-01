@@ -27,6 +27,14 @@
         <activity android:name=".QrScannerActivity" />
         <activity android:name=".MenuOptionActivity" />
         <activity android:name=".PaymentActivity" />
+        <activity android:name=".DashboardAdminActivity" />
+        <activity android:name=".TenantManagementActivity" />
+        <activity android:name=".MenuManagementActivity" />
+        <activity android:name=".PesananActivity" />
+        <activity android:name=".DetailPesananActivity" />
+        <activity android:name=".LaporanActivity" />
+        <activity android:name=".ProfilAdminActivity" />
+        <activity android:name=".StatusPesananActivity" />
     </application>
 
 </manifest>
