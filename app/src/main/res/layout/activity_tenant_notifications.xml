@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/page_tenant_notifications"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/toolbar_tenant_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp">
+
+        <TextView
+            android:id="@+id/btn_back_notifications"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="Back"
+            android:textColor="@color/dark_900"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_notifications_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Notifikasi"
+            android:textColor="@color/dark_900"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="42dp"
+            android:layout_height="42dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_tenant_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="18dp">
+
+        <LinearLayout
+            android:id="@+id/container_tenant_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/section_notifications_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Hari Ini"
+                android:textColor="@color/dark_900"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/notification_today_1"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/dot_notification_1"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_plus_circle" />
+
+                <TextView
+                    android:id="@+id/tv_notification_1_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="Pesanan baru #ORD-001\nMeja A12345"
+                    android:textColor="@color/dark_900"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_notification_1_time"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="10:25"
+                    android:textColor="@color/dark_700"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/notification_today_2"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/dot_notification_2"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_plus_circle" />
+
+                <TextView
+                    android:id="@+id/tv_notification_2_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="Pesanan #ORD-002 sedang\ndiproses"
+                    android:textColor="@color/dark_900"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_notification_2_time"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="10:15"
+                    android:textColor="@color/dark_700"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/notification_today_3"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/dot_notification_3"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_plus_circle" />
+
+                <TextView
+                    android:id="@+id/tv_notification_3_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="Pesanan #ORD-003 selesai"
+                    android:textColor="@color/dark_900"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_notification_3_time"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="09:50"
+                    android:textColor="@color/dark_700"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/section_notifications_yesterday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Kemarin"
+                android:textColor="@color/dark_900"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/notification_yesterday_1"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/dot_notification_4"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_plus_circle" />
+
+                <TextView
+                    android:id="@+id/tv_notification_4_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="Pesanan baru #ORD-004\nMeja B22222"
+                    android:textColor="@color/dark_900"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_notification_4_time"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="14:20"
+                    android:textColor="@color/dark_700"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
