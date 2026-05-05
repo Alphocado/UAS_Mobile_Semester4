@@ -96,7 +96,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         if ("super_admin".equals(roleObject != null ? roleObject.toString() : "")) {
                             startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
-                        } else {
+                        } else if ("tenant".equals(roleObject != null ? roleObject.toString() : "")) {
+                            editor.putString("tenantId", snapshot.child("tenantId").getValue(String.class));
+                            editor.apply();
+                            startActivity(new Intent(LoginActivity.this, TenantDashboardActivity.class));
+                        }  else {
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         }
                         finish();

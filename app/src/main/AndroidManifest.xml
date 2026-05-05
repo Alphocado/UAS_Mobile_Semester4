@@ -37,6 +37,14 @@
         <activity android:name=".StatusPesananActivity" />
         <activity android:name=".AdminAddTenantActivity" />
         <activity android:name=".AdminAddMenuActivity" />
+        <activity android:name=".TenantDashboardActivity" />
+        <activity android:name=".TenantOrdersActivity" />
+        <activity android:name=".TenantOrderDetailActivity" />
+        <activity android:name=".TenantMenuActivity" />
+        <activity android:name=".TenantAddMenuActivity" />
+        <activity android:name=".TenantReportActivity" />
+        <activity android:name=".TenantProfileActivity" />
+        <activity android:name=".TenantNotificationsActivity" />
     </application>
 
 </manifest>
