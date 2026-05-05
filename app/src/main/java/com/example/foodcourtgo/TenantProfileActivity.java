@@ -2,6 +2,7 @@ package com.example.foodcourtgo;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.*;
