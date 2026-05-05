@@ -32,6 +32,7 @@ public class TenantMenuActivity extends AppCompatActivity {
 
         rvMenu = findViewById(R.id.rv_menu);
         FloatingActionButton fab = findViewById(R.id.fab_add_menu);
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MenuAdminAdapter(menuList, menu -> {
@@ -67,7 +68,6 @@ public class TenantMenuActivity extends AppCompatActivity {
                 });
 
         fab.setOnClickListener(v -> startActivity(new Intent(this, TenantAddMenuActivity.class)));
-        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
     }
 
     @Override

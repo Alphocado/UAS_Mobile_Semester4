@@ -34,7 +34,7 @@ public class TenantReportActivity extends AppCompatActivity {
                         int totalOrders = 0;
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             PesananAdminModel p = ds.getValue(PesananAdminModel.class);
-                            if (p != null && p.getStatus().equals("done")) {
+                            if (p != null && "done".equals(p.getStatus())) {
                                 totalIncome += p.getTotalHarga();
                                 totalOrders++;
                             }

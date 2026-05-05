@@ -33,7 +33,6 @@ public class TenantDashboardActivity extends AppCompatActivity {
         tvWelcome.setText("Halo, " + tenantName);
         pesananRef = FirebaseDatabase.getInstance().getReference("pesanan");
 
-        // Real‑time listener
         pesananRef.orderByChild("tenantId").equalTo(tenantId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -61,15 +60,16 @@ public class TenantDashboardActivity extends AppCompatActivity {
                 });
 
         // Bottom Navigation
-        findViewById(R.id.nav_tenant_dashboard).setOnClickListener(v -> {});
-        findViewById(R.id.nav_tenant_orders).setOnClickListener(v ->
-                startActivity(new Intent(this, TenantOrdersActivity.class)));
-        findViewById(R.id.nav_tenant_menu).setOnClickListener(v ->
-                startActivity(new Intent(this, TenantMenuActivity.class)));
-        findViewById(R.id.nav_tenant_profile).setOnClickListener(v ->
-                startActivity(new Intent(this, TenantProfileActivity.class)));
+        TextView navDashboard = findViewById(R.id.nav_tenant_dashboard);
+        TextView navOrders = findViewById(R.id.nav_tenant_orders);
+        TextView navMenu = findViewById(R.id.nav_tenant_menu);
+        TextView navProfile = findViewById(R.id.nav_tenant_profile);
 
-        // Tombol notifikasi & lihat semua pesanan
+        navDashboard.setOnClickListener(v -> {});
+        navOrders.setOnClickListener(v -> startActivity(new Intent(this, TenantOrdersActivity.class)));
+        navMenu.setOnClickListener(v -> startActivity(new Intent(this, TenantMenuActivity.class)));
+        navProfile.setOnClickListener(v -> startActivity(new Intent(this, TenantProfileActivity.class)));
+
         findViewById(R.id.btn_tenant_notification).setOnClickListener(v ->
                 startActivity(new Intent(this, TenantNotificationsActivity.class)));
         findViewById(R.id.btn_view_all_orders).setOnClickListener(v ->

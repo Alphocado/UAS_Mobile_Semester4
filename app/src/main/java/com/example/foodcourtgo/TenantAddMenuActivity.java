@@ -2,14 +2,16 @@ package com.example.foodcourtgo;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class TenantAddMenuActivity extends AppCompatActivity {
     EditText etName, etPrice;
-    Button btnSimpan;
+    TextView btnSimpan;
     String tenantId;
 
     @Override
@@ -22,9 +24,8 @@ public class TenantAddMenuActivity extends AppCompatActivity {
 
         etName = findViewById(R.id.et_menu_name);
         etPrice = findViewById(R.id.et_menu_price);
-        btnSimpan = findViewById(R.id.btn_save_menu);
+        btnSimpan = findViewById(R.id.btn_save_menu);   // TextView
 
-        // Tombol back
         findViewById(R.id.btn_back_add_menu).setOnClickListener(v -> finish());
 
         btnSimpan.setOnClickListener(v -> simpanMenu());
@@ -45,12 +46,11 @@ public class TenantAddMenuActivity extends AppCompatActivity {
             return;
         }
 
-        // Kategori bisa diambil dari spinner jika ada, untuk sementara kosong
         String menuId = tenantId + "_M" + System.currentTimeMillis() % 100000;
         MenuModel menu = new MenuModel();
         menu.setMenuId(menuId);
         menu.setNama(nama);
-        menu.setDeskripsi("");   // bisa diisi nanti
+        menu.setDeskripsi("");
         menu.setHarga(harga);
         menu.setTenantId(tenantId);
         menu.setTambahan(new ArrayList<>());

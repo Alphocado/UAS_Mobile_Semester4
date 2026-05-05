@@ -34,7 +34,6 @@ public class TenantOrderDetailActivity extends AppCompatActivity {
         findViewById(R.id.btn_process_order_detail).setOnClickListener(v -> updateStatus("processing"));
         findViewById(R.id.btn_cancel_order_detail).setOnClickListener(v -> updateStatus("cancelled"));
 
-        // Realtime listener
         detailListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snap) {
@@ -44,6 +43,7 @@ public class TenantOrderDetailActivity extends AppCompatActivity {
                 tvTableCode.setText("Meja / Kode: " + p.getMeja());
                 tvOrderTime.setText("Waktu: " + p.getWaktu());
                 chipStatus.setText(p.getStatus());
+
                 if (p.getItems() != null && p.getItems().size() > 0) {
                     ItemPesananModel item1 = p.getItems().get(0);
                     tvMenu1.setText(item1.getNama() + "  " + item1.getQty() + "x  Rp " + item1.getHarga());
@@ -52,6 +52,7 @@ public class TenantOrderDetailActivity extends AppCompatActivity {
                     ItemPesananModel item2 = p.getItems().get(1);
                     tvMenu2.setText(item2.getNama() + "  " + item2.getQty() + "x  Rp " + item2.getHarga());
                 } else tvMenu2.setText("");
+
                 tvSubtotal.setText("Subtotal Rp " + String.format("%,d", p.getTotalHarga()));
             }
             @Override

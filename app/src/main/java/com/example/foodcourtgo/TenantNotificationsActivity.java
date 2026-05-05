@@ -30,7 +30,6 @@ public class TenantNotificationsActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv_tenant_notifications);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TenantNotificationAdapter(list, notif -> {
-            // Tandai dibaca
             notifRef.child(notif.getId()).child("status").setValue("read");
             Toast.makeText(this, notif.getText(), Toast.LENGTH_SHORT).show();
         });

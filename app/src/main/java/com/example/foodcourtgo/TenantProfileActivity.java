@@ -1,15 +1,18 @@
 package com.example.foodcourtgo;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.*;
 
 public class TenantProfileActivity extends AppCompatActivity {
     EditText etName, etEmail, etPhone, etLocation;
-    Button btnSave;
+    TextView btnSave, btnLogout;
     String tenantId;
     DatabaseReference tenantRef;
     ValueEventListener profileListener;
@@ -27,6 +30,7 @@ public class TenantProfileActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.et_profile_phone);
         etLocation = findViewById(R.id.et_profile_location);
         btnSave = findViewById(R.id.btn_save_profile);
+        btnLogout = findViewById(R.id.btn_logout);   // pastikan id ini ada di layout
 
         tenantRef = FirebaseDatabase.getInstance().getReference("tenant").child(tenantId);
         profileListener = new ValueEventListener() {
@@ -55,6 +59,15 @@ public class TenantProfileActivity extends AppCompatActivity {
             tenantRef.child("telepon").setValue(phone);
             tenantRef.child("lokasi").setValue(lokasi);
             Toast.makeText(this, "Profil disimpan", Toast.LENGTH_SHORT).show();
+        });
+
+        btnLogout.setOnClickListener(v -> {
+            getSharedPreferences("FoodCourtGoPrefs", MODE_PRIVATE)
+                    .edit().clear().apply();
+            Intent intent = new Intent(TenantProfileActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
         findViewById(R.id.btn_back_profile).setOnClickListener(v -> finish());

@@ -3,7 +3,6 @@ package com.example.foodcourtgo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +45,6 @@ public class TenantOrdersActivity extends AppCompatActivity {
         rvOrders.setAdapter(adapter);
 
         pesananRef = FirebaseDatabase.getInstance().getReference("pesanan");
-        // Real‑time listener
         pesananRef.orderByChild("tenantId").equalTo(tenantId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -65,7 +63,6 @@ public class TenantOrdersActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError e) {}
                 });
 
-        // Filter tabs
         tabAll.setOnClickListener(v -> setFilter("all"));
         tabPending.setOnClickListener(v -> setFilter("pending"));
         tabProcessing.setOnClickListener(v -> setFilter("processing"));
@@ -85,7 +82,6 @@ public class TenantOrdersActivity extends AppCompatActivity {
 
     private void setFilter(String filter) {
         currentFilter = filter;
-        // Update background tab
         tabAll.setBackgroundResource(filter.equals("all") ? R.drawable.bg_nav_active : R.drawable.bg_card);
         tabPending.setBackgroundResource(filter.equals("pending") ? R.drawable.bg_nav_active : R.drawable.bg_card);
         tabProcessing.setBackgroundResource(filter.equals("processing") ? R.drawable.bg_nav_active : R.drawable.bg_card);
