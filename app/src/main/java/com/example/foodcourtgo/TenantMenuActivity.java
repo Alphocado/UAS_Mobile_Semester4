@@ -68,6 +68,15 @@ public class TenantMenuActivity extends AppCompatActivity {
                 });
 
         fab.setOnClickListener(v -> startActivity(new Intent(this, TenantAddMenuActivity.class)));
+
+        // Bottom Navigation
+        findViewById(R.id.nav_tenant_dashboard).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantDashboardActivity.class)));
+        findViewById(R.id.nav_tenant_orders).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantOrdersActivity.class)));
+        findViewById(R.id.nav_tenant_menu).setOnClickListener(v -> {});
+        findViewById(R.id.nav_tenant_profile).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantProfileActivity.class)));
     }
 
     @Override

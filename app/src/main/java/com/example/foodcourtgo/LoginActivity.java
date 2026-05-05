@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Nonaktifkan tombol sementara supaya tidak diklik dua kali
             btnLogin.setEnabled(false);
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("akun");
@@ -59,7 +57,8 @@ public class LoginActivity extends AppCompatActivity {
                     boolean loginBerhasil = false;
                     String userId = "";
                     String namaUser = "";
-                    String roleObject = ""; // pindah ke luar
+                    String role = "";
+                    String tenantId = "";
 
                     for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                         Object emailObj    = childSnapshot.child("email").getValue();
@@ -67,21 +66,24 @@ public class LoginActivity extends AppCompatActivity {
                         Object passObj     = childSnapshot.child("pass").getValue();
                         Object nameObj     = childSnapshot.child("name").getValue();
                         Object roleObj     = childSnapshot.child("role").getValue();
+                        Object tenantIdObj = childSnapshot.child("tenantId").getValue();
 
-                        String email      = emailObj    == null ? "" : emailObj.toString();
-                        String username   = usernameObj == null ? "" : usernameObj.toString();
-                        String pass       = passObj     == null ? "" : passObj.toString();
-                        String name       = nameObj     == null ? "" : nameObj.toString();
-                        String role       = String.valueOf(childSnapshot.child("role").getValue());
+                        String email    = emailObj == null ? "" : emailObj.toString();
+                        String username = usernameObj == null ? "" : usernameObj.toString();
+                        String pass     = passObj == null ? "" : passObj.toString();
+                        String name     = nameObj == null ? "" : nameObj.toString();
+                        String roleStr  = roleObj == null ? "customer" : roleObj.toString();
+                        String tenId    = tenantIdObj == null ? "" : tenantIdObj.toString();
 
                         if ((usernameOrEmail.equalsIgnoreCase(email) ||
                                 usernameOrEmail.equalsIgnoreCase(username))
                                 && pass.equals(password)) {
 
                             loginBerhasil = true;
-                            userId = childSnapshot.getKey();  // Contoh: "A0001"
+                            userId = childSnapshot.getKey();
                             namaUser = name;
-                            roleObject = role; // ambil role yang benar
+                            role = roleStr;
+                            tenantId = tenId;
                             break;
                         }
                     }
@@ -91,16 +93,17 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("userId", userId);
                         editor.putString("namaUser", namaUser);
-                        editor.putString("role", roleObject != null ? roleObject.toString() : "customer");
+                        editor.putString("role", role);
+                        if ("tenant".equals(role)) {
+                            editor.putString("tenantId", tenantId);
+                        }
                         editor.apply();
 
-                        if ("super_admin".equals(roleObject != null ? roleObject.toString() : "")) {
+                        if ("super_admin".equals(role)) {
                             startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
-                        } else if ("tenant".equals(roleObject != null ? roleObject.toString() : "")) {
-                            editor.putString("tenantId", snapshot.child("tenantId").getValue(String.class));
-                            editor.apply();
+                        } else if ("tenant".equals(role)) {
                             startActivity(new Intent(LoginActivity.this, TenantDashboardActivity.class));
-                        }  else {
+                        } else {
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         }
                         finish();

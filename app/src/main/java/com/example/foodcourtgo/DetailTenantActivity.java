@@ -196,7 +196,9 @@ public class DetailTenantActivity extends AppCompatActivity {
                 .setTitle("Pesanan Anda")
                 .setMessage("Total: Rp" + String.format("%,d", hitungTotalHarga()).replace(',', '.') + "\n\nIngin melanjutkan ke pembayaran?")
                 .setPositiveButton("Checkout", (dialog, which) -> {
-                    startActivity(new Intent(DetailTenantActivity.this, PaymentActivity.class));
+                    Intent intent = new Intent(DetailTenantActivity.this, PaymentActivity.class);
+                    intent.putExtra("tenantId", tenantId);   // <-- tambahkan ini
+                    startActivity(intent);
                 })
                 .setNegativeButton("Tutup", null)
                 .show();

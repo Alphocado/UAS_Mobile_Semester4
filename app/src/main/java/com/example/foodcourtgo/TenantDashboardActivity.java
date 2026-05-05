@@ -74,5 +74,15 @@ public class TenantDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(this, TenantNotificationsActivity.class)));
         findViewById(R.id.btn_view_all_orders).setOnClickListener(v ->
                 startActivity(new Intent(this, TenantOrdersActivity.class)));
+
+        // Di dalam onCreate, setelah inisialisasi view
+        findViewById(R.id.nav_tenant_dashboard).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantDashboardActivity.class)));
+        findViewById(R.id.nav_tenant_orders).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantOrdersActivity.class)));
+        findViewById(R.id.nav_tenant_menu).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantMenuActivity.class)));
+        findViewById(R.id.nav_tenant_profile).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantProfileActivity.class)));
     }
 }

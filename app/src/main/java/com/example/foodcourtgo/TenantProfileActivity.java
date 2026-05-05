@@ -30,7 +30,7 @@ public class TenantProfileActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.et_profile_phone);
         etLocation = findViewById(R.id.et_profile_location);
         btnSave = findViewById(R.id.btn_save_profile);
-        btnLogout = findViewById(R.id.btn_logout);   // pastikan id ini ada di layout
+        btnLogout = findViewById(R.id.btn_logout);
 
         tenantRef = FirebaseDatabase.getInstance().getReference("tenant").child(tenantId);
         profileListener = new ValueEventListener() {
@@ -71,6 +71,15 @@ public class TenantProfileActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_back_profile).setOnClickListener(v -> finish());
+
+        // Bottom Navigation
+        findViewById(R.id.nav_tenant_dashboard).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantDashboardActivity.class)));
+        findViewById(R.id.nav_tenant_orders).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantOrdersActivity.class)));
+        findViewById(R.id.nav_tenant_menu).setOnClickListener(v ->
+                startActivity(new Intent(this, TenantMenuActivity.class)));
+        findViewById(R.id.nav_tenant_profile).setOnClickListener(v -> {});
     }
 
     @Override

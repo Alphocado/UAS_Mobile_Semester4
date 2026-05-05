@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_screen">
 
+    <!-- Toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="76dp"
@@ -44,8 +45,67 @@
         android:id="@+id/fab_add_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/ic_plus"
         android:tint="@color/white"
         app:backgroundTint="@color/biru_tua" />
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_nav"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/nav_tenant_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Dashboard"
+            android:textColor="@color/dark_700"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/nav_tenant_orders"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Pesanan"
+            android:textColor="@color/dark_700"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/nav_tenant_menu"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/bg_nav_active"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Menu"
+            android:textColor="@color/blue_700"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/nav_tenant_profile"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Profil"
+            android:textColor="@color/dark_700"
+            android:textSize="11sp" />
+    </LinearLayout>
 </LinearLayout>
