@@ -6,10 +6,11 @@ public class TenantModel {
     private String deskripsi;
     private String kategori;
     private String gambar;
-    private String status;   // "active" / "inactive"
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    private String status;
+    private String email;
+    private String telepon;
+    private String lokasi;
+    private String namaPemilik;  // opsional
 
     // Constructor kosong wajib ada untuk Firebase
     public TenantModel() {}
@@ -22,17 +23,34 @@ public class TenantModel {
         this.gambar = gambar;
     }
 
-    // Getters
+    // Getter & Setter
     public String getId() { return id; }
-    public String getNama() { return nama; }
-    public String getDeskripsi() { return deskripsi; }
-    public String getKategori() { return kategori; }
-    public String getGambar() { return gambar; }
-
-    // Setters
     public void setId(String id) { this.id = id; }
+
+    public String getNama() { return nama; }
     public void setNama(String nama) { this.nama = nama; }
+
+    public String getDeskripsi() { return deskripsi; }
     public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
+
+    public String getKategori() { return kategori; }
     public void setKategori(String kategori) { this.kategori = kategori; }
+
+    public String getGambar() { return gambar; }
     public void setGambar(String gambar) { this.gambar = gambar; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getTelepon() { return telepon; }
+    public void setTelepon(String telepon) { this.telepon = telepon; }
+
+    public String getLokasi() { return lokasi; }
+    public void setLokasi(String lokasi) { this.lokasi = lokasi; }
+
+    public String getNamaPemilik() { return namaPemilik; }
+    public void setNamaPemilik(String namaPemilik) { this.namaPemilik = namaPemilik; }
 }
