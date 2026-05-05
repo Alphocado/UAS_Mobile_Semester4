@@ -53,12 +53,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nama Tenant"
                 android:textColor="@color/dark_900"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/etNama"
                 android:layout_width="match_parent"
@@ -70,13 +71,14 @@
                 android:paddingLeft="14dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Deskripsi"
                 android:textColor="@color/dark_900"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/etDeskripsi"
                 android:layout_width="match_parent"
@@ -90,13 +92,14 @@
                 android:paddingTop="14dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Kategori"
                 android:textColor="@color/dark_900"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/etKategori"
                 android:layout_width="match_parent"
@@ -108,13 +111,14 @@
                 android:paddingLeft="14dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="URL Gambar (opsional)"
                 android:textColor="@color/dark_900"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/etGambar"
                 android:layout_width="match_parent"
